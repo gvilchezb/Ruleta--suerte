@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Ruleta de la Suerte</string>
+    <string name="nointernet">Please check your internet connection and try again</string>
+    <string name="title">Ruleta de la Suerte</string>
+</resources>
