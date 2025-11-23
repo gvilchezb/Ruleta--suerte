@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lucky Wheel</string>
+    <string name="nointernet">Please check your internet connection and try again</string>
+    <string name="title">Lucky Wheel</string>
+</resources>

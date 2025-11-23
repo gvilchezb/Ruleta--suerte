@@ -103,6 +103,9 @@ public class LuckyWheel extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                // Reproducir sonido del botón
+                BackgroundAudioManager.getInstance().playSound(R.raw.wheel);
+
                 // Comprobar si hay monedas suficientes
                 if (coin <= 0) {
                     Toast.makeText(getApplicationContext(),
@@ -181,6 +184,10 @@ public class LuckyWheel extends AppCompatActivity {
 
         Button btnGuardarSalir = findViewById(R.id.acabar);
         btnGuardarSalir.setOnClickListener(v -> {
+
+            // Reproducir sonido del botón
+            BackgroundAudioManager.getInstance().playSound(R.raw.victory);
+
             Completable.fromAction(() -> {
                         SQLiteDatabase db = dbHelper.getWritableDatabase();
                         ContentValues values = new ContentValues();

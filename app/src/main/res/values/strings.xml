@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">Ruleta de la Suerte</string>
-    <string name="nointernet">Please check your internet connection and try again</string>
+    <string name="nointernet">Por favor, compruebe su conexión a internet e inténtelo de nuevo.</string>
     <string name="title">Ruleta de la Suerte</string>
+    <string name="how_to_play">Cómo jugar</string>
+    <string name="play_button">JUGAR</string>
+    <string name="scoreboard_button">MARCADORES</string>
+    <string name="menu_button">MENÚ</string>
+    <string name="loading_scores">Cargando marcadores...</string>
+    <string name="instructions">1. Pulsa el botón JUGAR para girar la ruleta.\n\n2. Cada giro cuesta 10 monedas.\n\n3. Gana o pierde monedas según el resultado.\n\n4. Si llegas a 0 monedas, el juego termina.\n\n5. Pulsa el botón ACABAR para finalizar el juego y ver tu puntuación.</string>
+    <string name="end_game_button">ACABAR</string>
 </resources>

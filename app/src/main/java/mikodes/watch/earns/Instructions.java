@@ -35,6 +35,11 @@ public class Instructions extends AppCompatActivity{
         btnVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // Reproducir sonido del botón
+                BackgroundAudioManager.getInstance().playSound(R.raw.button);
+
+                //Abrir la pantalla de la ruleta
                 Intent intent = new Intent(Instructions.this, LuckyWheel.class);
                 startActivity(intent);
                 finish(); // Cierra la pantalla de instrucciones

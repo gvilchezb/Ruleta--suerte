@@ -57,6 +57,9 @@ public class Marcadores extends AppCompatActivity {
         // Botón Menú
         Button btnMenu = findViewById(R.id.Menu);
         btnMenu.setOnClickListener(v -> {
+            // Reproducir sonido del botón
+            BackgroundAudioManager.getInstance().playSound(R.raw.button);
+            // Abrir la pantalla de inicio
             Intent intent = new Intent(Marcadores.this, SplashScreen.class);
             startActivity(intent);
             finish();
