@@ -21,6 +21,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class Marcadores extends AppCompatActivity {
     private ScoreDatabaseHelper dbHelper;
+    public static final String COL_CITY = "ciudad";
+    public static final String COL_COUNTRY = "pais";
+
 
 
     @Override
@@ -34,12 +37,15 @@ public class Marcadores extends AppCompatActivity {
         Single<List<String>> obtenerTop5 = Single.fromCallable(() -> {
             List<String> lista = new ArrayList<>();
             SQLiteDatabase db = dbHelper.getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT fecha, puntuacion FROM marcadores ORDER BY puntuacion DESC LIMIT 5", null);
+            Cursor cursor = db.rawQuery("SELECT fecha, puntuacion, ciudad, pais FROM marcadores ORDER BY puntuacion DESC LIMIT 5", null);
             while (cursor.moveToNext()) {
                 String fecha = cursor.getString(0);
                 int puntuacion = cursor.getInt(1);
-                lista.add(fecha + " - " + puntuacion + " puntos");
+                String ciudad = cursor.getString(2);
+                String pais = cursor.getString(3);
+                lista.add(fecha + " - " + puntuacion + " puntos - " + ciudad + ", " + pais);
             }
+
             cursor.close();
             db.close();
             return lista;
@@ -58,7 +64,7 @@ public class Marcadores extends AppCompatActivity {
         Button btnMenu = findViewById(R.id.Menu);
         btnMenu.setOnClickListener(v -> {
             // Reproducir sonido del botón
-            BackgroundAudioManager.getInstance().playSound(R.raw.button);
+            BackgroundAudioManager.getInstance().playButtonSound();
             // Abrir la pantalla de inicio
             Intent intent = new Intent(Marcadores.this, SplashScreen.class);
             startActivity(intent);

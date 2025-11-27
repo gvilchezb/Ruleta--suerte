@@ -36,8 +36,9 @@ public class Instructions extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
+
                 // Reproducir sonido del botón
-                BackgroundAudioManager.getInstance().playSound(R.raw.button);
+                BackgroundAudioManager.getInstance().playButtonSound();
 
                 //Abrir la pantalla de la ruleta
                 Intent intent = new Intent(Instructions.this, LuckyWheel.class);

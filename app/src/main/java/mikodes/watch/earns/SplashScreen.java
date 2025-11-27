@@ -17,7 +17,7 @@ public class SplashScreen extends AppCompatActivity {
         // Botón Jugar
         findViewById(R.id.btnJugar).setOnClickListener(v -> {
             // Reproducir sonido del botón
-            BackgroundAudioManager.getInstance().playSound(R.raw.button);
+            BackgroundAudioManager.getInstance().playButtonSound();
 
             // Abrir la pantalla de instrucciones
             Intent intent = new Intent(SplashScreen.this, Instructions.class);
@@ -28,7 +28,7 @@ public class SplashScreen extends AppCompatActivity {
         // Botón Marcadores
         findViewById(R.id.marcadores).setOnClickListener(v -> {
             // Reproducir sonido del botón
-            BackgroundAudioManager.getInstance().playSound(R.raw.button);
+            BackgroundAudioManager.getInstance().playButtonSound();
 
             // Abrir la pantalla de marcadores
             Intent intent = new Intent(SplashScreen.this, Marcadores.class);
