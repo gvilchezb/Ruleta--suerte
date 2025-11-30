@@ -7,7 +7,9 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -56,6 +58,18 @@ public class LuckyWheel extends AppCompatActivity {
     private int coin = 200;  // Puntuación inicial
     private TextView tvCoins;
 
+    protected void attachBaseContext(Context base) {
+        SharedPreferences prefs = base.getSharedPreferences("ajustes", MODE_PRIVATE);
+        String lang = prefs.getString("idioma", "es");
+
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+
+        super.attachBaseContext(base.createConfigurationContext(config));
+    }
     private void showVictoryNotification() {
         String channelId = "victory_channel";
         String channelName = "Notificaciones de Victoria";

@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Ruleta de la Suerte</string>
+    <string name="app_name">Glücksrad</string>
+    <string name="end_game_button">Beenden</string>
+    <string name="WebView">WebView</string>
+    <string name="title">Glücksrad</string>
+    <string name="how_to_play">"Spielanleitung "</string>
+    <string name="nointernet">Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.</string>
+    <string name="play_button">SPIELEN</string>
+    <string name="scoreboard_button">Bestenliste</string>
+    <string name="menu_button">Menü</string>
+    <string name="loading_scores">"Bestenliste wird geladen… "</string>
+    <string name="instructions">1. Drücken Sie die Schaltfläche „Spielen“, um das Rad zu drehen. 2. Jeder Dreh kostet 10 Münzen. 3. Je nach Ergebnis gewinnen oder verlieren Sie Münzen. 4. Wenn Sie 0 Münzen haben, ist das Spiel beendet. 5. Drücken Sie die Schaltfläche „Beenden“, um das Spiel zu beenden und Ihre Punktzahl anzuzeigen.</string>
+    <string name="Opciones">OPTIONEN</string>
+    <string name="ESPAÑOL">ESPAÑOL</string>
+    <string name="CATALÀ">CATALÀ</string>
+    <string name="ENLGISH">ENGLISH</string>
+    <string name="GERMAN">GERMAN</string>
+    <string name="OPTIONS">OPTIONEN</string>
+    <string name="OptionsTitle">OPTIONEN</string>
+    <string name="MUSICA">Musik ändern</string>
+    <string name="MUSICAOG">Originalmusik</string>
 </resources>

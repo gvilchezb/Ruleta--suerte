@@ -1,20 +1,24 @@
-
 package mikodes.watch.earns;
 
 import android.content.Context;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.net.Uri;
 
 public class BackgroundAudioManager {
     private static BackgroundAudioManager instance;
 
-    private MediaPlayer bgPlayer;
+    private MediaPlayer bgPlayer;   // 🔥 ÚNICO reproductor de música de fondo
     private SoundPool soundPool;
+
     private int buttonSoundId;
     private int wheelSoundId;
     private int victorySoundId;
+
     private Context appContext;
+
+    private String customMusicUri = null;
 
     private BackgroundAudioManager() {}
 
@@ -23,22 +27,13 @@ public class BackgroundAudioManager {
         return instance;
     }
 
-    // Inicializar con applicationContext (llamar desde Application.onCreate)
+    // Inicializar (llamar desde Application)
     public void init(Context context) {
         if (context == null) return;
+
         if (appContext == null) appContext = context.getApplicationContext();
 
-        // Inicializar música de fondo
-        if (bgPlayer == null) {
-            bgPlayer = MediaPlayer.create(appContext, R.raw.background);
-            if (bgPlayer != null) {
-                bgPlayer.setLooping(true);
-                bgPlayer.setVolume(1f, 1f);
-                bgPlayer.start();
-            }
-        }
-
-        // Inicializar SoundPool para efectos
+        // Crear SoundPool (SFX)
         if (soundPool == null) {
             AudioAttributes attrs = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_GAME)
@@ -50,63 +45,108 @@ public class BackgroundAudioManager {
                     .setAudioAttributes(attrs)
                     .build();
 
-            // Cargar sonidos
             buttonSoundId = soundPool.load(appContext, R.raw.button, 1);
             wheelSoundId = soundPool.load(appContext, R.raw.wheel, 1);
             victorySoundId = soundPool.load(appContext, R.raw.victory, 1);
+        }
 
+        // Crear música de fondo por defecto
+        if (bgPlayer == null) {
+            bgPlayer = MediaPlayer.create(appContext, R.raw.background);
+            if (bgPlayer != null) {
+                bgPlayer.setLooping(true);
+                bgPlayer.setVolume(1f, 1f);
+                bgPlayer.start();
+            }
         }
     }
 
-    // Reproducir sonido del botón
-    public void playButtonSound() {
-        playSfx(buttonSoundId);
+    // ------- MÚSICA PERSONALIZADA --------
+
+    public void setCustomBackgroundMusic(Uri uri) {
+        try {
+            if (bgPlayer != null) {
+                bgPlayer.reset();
+            } else {
+                bgPlayer = new MediaPlayer();
+            }
+
+            bgPlayer.setDataSource(appContext, uri);
+            bgPlayer.setLooping(true);
+            bgPlayer.prepare();
+            bgPlayer.start();
+
+            customMusicUri = uri.toString(); // por si luego quieres guardarla
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    // Reproducir sonido de éxito
-    public void playWheelSound() {
-        playSfx(wheelSoundId);
+    // Guardar si hay música personalizada
+    public boolean hasCustomMusic() {
+        return customMusicUri != null;
     }
 
-    // Reproducir sonido de error
-    public void playVictorySound() {
-        playSfx(victorySoundId);
+    public String getCustomMusicUri() {
+        return customMusicUri;
     }
 
-    // Método interno para reproducir SFX y bajar volumen del fondo temporalmente
+    // Volver a la música original de la app
+    public void playOriginalMusic() {
+        try {
+            if (bgPlayer != null) {
+                bgPlayer.reset();
+            } else {
+                bgPlayer = new MediaPlayer();
+            }
+
+            // Reproducir música por defecto
+            bgPlayer = MediaPlayer.create(appContext, R.raw.background);
+            bgPlayer.setLooping(true);
+            bgPlayer.setVolume(1f, 1f);
+            bgPlayer.start();
+
+            // Limpiar música personalizada
+            customMusicUri = null;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // ------- EFECTOS -------
+    public void playButtonSound() { playSfx(buttonSoundId); }
+    public void playWheelSound() { playSfx(wheelSoundId); }
+    public void playVictorySound() { playSfx(victorySoundId); }
+
     private void playSfx(int soundId) {
         if (soundPool != null && soundId != 0) {
-            // Bajar volumen del fondo mientras suena el efecto
-            if (bgPlayer != null && bgPlayer.isPlaying()) {
+            if (bgPlayer != null && bgPlayer.isPlaying())
                 bgPlayer.setVolume(0.3f, 0.3f);
-            }
 
             soundPool.play(soundId, 1f, 1f, 1, 0, 1f);
 
-            // Restaurar volumen del fondo después de un breve delay
             new android.os.Handler().postDelayed(() -> {
-                if (bgPlayer != null && bgPlayer.isPlaying()) {
+                if (bgPlayer != null && bgPlayer.isPlaying())
                     bgPlayer.setVolume(1f, 1f);
-                }
-            }, 500); // medio segundo
+            }, 500);
         }
     }
 
-    // Pausar música de fondo
+    // ------- CONTROL --------
     public void pauseBackground() {
-        if (bgPlayer != null && bgPlayer.isPlaying()) {
+        if (bgPlayer != null && bgPlayer.isPlaying())
             bgPlayer.pause();
-        }
     }
 
-    // Reanudar música de fondo
     public void resumeBackground() {
-        if (bgPlayer != null && !bgPlayer.isPlaying()) {
+        if (bgPlayer != null && !bgPlayer.isPlaying())
             bgPlayer.start();
-        }
     }
 
-    // Liberar recursos (llamar en onTerminate o cuando se cierre la app)
+    // ------- LIMPIEZA --------
     public void stopAll() {
         if (bgPlayer != null) {
             try { bgPlayer.stop(); } catch (Exception ignored) {}

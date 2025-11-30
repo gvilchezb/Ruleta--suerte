@@ -3,4 +3,21 @@
     <string name="app_name">Lucky Wheel</string>
     <string name="nointernet">Please check your internet connection and try again</string>
     <string name="title">Lucky Wheel</string>
+    <string name="how_to_play">How to play</string>
+    <string name="play_button">PLAY</string>
+    <string name="scoreboard_button">SCOREBOARD</string>
+    <string name="menu_button">MENU</string>
+    <string name="loading_scores">Loading Scoreboards</string>
+    <string name="instructions">1. Press the PLAY button to spin the wheel. 2. Each spin costs 10 coins. 3. Win or lose coins depending on the result. 4. If you reach 0 coins, the game ends. 5. Press the FINISH button to end the game and see your score.</string>
+    <string name="end_game_button">END</string>
+    <string name="WebView">WebView</string>
+    <string name="Opciones">OPTIONS</string>
+    <string name="ESPAÑOL">ESPAÑOL</string>
+    <string name="CATALÀ">CATALÀ</string>
+    <string name="ENLGISH">ENGLISH</string>
+    <string name="GERMAN">GERMAN</string>
+    <string name="OPTIONS">OPTIONS</string>
+    <string name="OptionsTitle">OPTIONS</string>
+    <string name="MUSICA">Change Music</string>
+    <string name="MUSICAOG">Original Music</string>
 </resources>

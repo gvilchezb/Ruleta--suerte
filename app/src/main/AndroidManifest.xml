@@ -13,6 +13,8 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
 
     <application
@@ -52,7 +54,10 @@
                 android:value="mikodes.watch.earns.SplashScreen" />
 
         </activity>
+        <activity android:name=".InfoWebActivity" />
+
         <activity android:name=".Marcadores" />
+        <activity android:name=".Options" />
     </application>
 
 </manifest>

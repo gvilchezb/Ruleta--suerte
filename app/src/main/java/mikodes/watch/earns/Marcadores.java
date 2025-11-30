@@ -1,6 +1,9 @@
 package mikodes.watch.earns;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
@@ -27,6 +31,18 @@ public class Marcadores extends AppCompatActivity {
 
 
     @Override
+    protected void attachBaseContext(Context base) {
+        SharedPreferences prefs = base.getSharedPreferences("ajustes", MODE_PRIVATE);
+        String lang = prefs.getString("idioma", "es");
+
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+
+        super.attachBaseContext(base.createConfigurationContext(config));
+    }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_marcadores);
